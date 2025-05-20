@@ -2,7 +2,7 @@
 import type { Product } from "../types/Product";
 
 
-const API_URL = 'https://backendinnovart.onrender.com/productos';
+const API_URL = 'https://backendstock-le0i.onrender.com/productos';
 
 export const getAllProducts = async (): Promise<Product[]> => {
   const res = await fetch(API_URL);
