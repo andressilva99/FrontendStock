@@ -10,29 +10,29 @@ const Login: React.FC = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch('http://localhost:3000/login', {
+      const response = await fetch('https://backendstock-le0i.onrender.com/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ usuario, contraseña })
       });
 
       if (!response.ok) {
-        alert('Credenciales inválidas');
+        alert('❌ Credenciales inválidas');
         return;
       }
 
       const data = await response.json();
       localStorage.setItem('usuario', JSON.stringify(data));
 
-      if (data.rol === 'administrador') {
+      if (data.IdRol === 'ROL-ADMIN') {
         navigate('/admin');
       } else {
-        navigate('/empleado');
+        navigate('/empleado'); // lo hacés después
       }
 
     } catch (error) {
       console.error('Error en el login:', error);
-      alert('Hubo un problema al conectar con el servidor.');
+      alert('⚠️ Hubo un problema al conectar con el servidor.');
     }
   };
 
@@ -41,7 +41,7 @@ const Login: React.FC = () => {
       <h2 className="mb-4">Ingreso al Sistema</h2>
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
-          <label className="form-label">Usuario</label>
+          <label className="form-label">Usuario (nombre o email)</label>
           <input
             type="text"
             className="form-control"
